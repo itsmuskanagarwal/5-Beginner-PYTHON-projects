@@ -1,34 +1,52 @@
-import art
-alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+#Password Generator Project
+import random
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
-def caesar(start_text, shift_amount, cipher_direction):
-  end_text = ""
-  if cipher_direction == "decode":
-    shift_amount *= -1
-  for char in start_text:
-    if char in alphabet:    
-      position = alphabet.index(char)
-      new_position = position + shift_amount
-      end_text += alphabet[new_position]
-    else:
-      end_text += alphabet[new_position]
-  print(f"Here's the {cipher_direction}d result: {end_text}")
+print("Welcome to the PyPassword Generator!")
+nr_letters= int(input("How many letters would you like in your password?\n")) 
+nr_symbols = int(input(f"How many symbols would you like?\n"))
+nr_numbers = int(input(f"How many numbers would you like?\n"))
 
-#print ASCII art
-print(art.logo)
+#Eazy Level - Order not randomised:
+#e.g. 4 letter, 2 symbol, 2 number = JduE&!91
 
-#if you want to continue the process
-flag=1
-while(flag==1):
-  direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
-  text = input("Type your message:\n").lower()
-  shift = int(input("Type the shift number:\n"))
-  
-  #if shift is a large no
-  shift = shift % 26
-  caesar(start_text=text, shift_amount=shift, cipher_direction=direction)
-  result = input("Do you want to continue? 'Y'/'N'")
-  if result == 'Y':
-    flag==1
-  if result == 'N':
-    flag==0
+# password=""
+# for i in range(0, nr_letters):
+#   random_num1 = random.randint(1,len(letters))
+#   password+=letters[random_num1]
+
+# for i in range(0, nr_symbols):
+#   random_num1 = random.randint(1,len(symbols))
+#   password+=symbols[random_num1]
+
+# for i in range(0, nr_numbers):
+#   random_num1 = random.randint(1,len(numbers))
+#   password+=numbers[random_num1]
+
+# print(password)
+#Hard Level - Order of characters randomised:
+#e.g. 4 letter, 2 symbol, 2 number = g^2jk8&P
+# choice=[letters,numers,symbols]
+# add= nr_letters+nr_numbers+nr_letters
+
+# for i in range(0,add):
+#   random_num1 = random.randint(1,3)
+password_list=[]
+password =""
+for i in range(0, nr_letters):
+  password_list.append(random.choice(letters))
+
+for i in range(0, nr_symbols):
+  password_list.append(random.choice(symbols))
+
+for i in range(0, nr_numbers):
+  password_list.append(random.choice(numbers))
+
+
+random.shuffle(password_list)
+
+for i in password_list:
+  password += i
+print(str(password))
