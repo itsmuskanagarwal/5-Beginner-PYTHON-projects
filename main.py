@@ -1,28 +1,34 @@
-from replit import clear
-from art import logo
+import art
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-print(logo)
+def caesar(start_text, shift_amount, cipher_direction):
+  end_text = ""
+  if cipher_direction == "decode":
+    shift_amount *= -1
+  for char in start_text:
+    if char in alphabet:    
+      position = alphabet.index(char)
+      new_position = position + shift_amount
+      end_text += alphabet[new_position]
+    else:
+      end_text += alphabet[new_position]
+  print(f"Here's the {cipher_direction}d result: {end_text}")
 
-bid_details={}
-flag = True
+#print ASCII art
+print(art.logo)
+
+#if you want to continue the process
+flag=1
 while(flag==1):
-  name = input("Enter you name: ")
-  bid_amount = int(input("Enter you bidding amount: "))
-  bid_details[name]=bid_amount
-
-  result = input("Are there any other bidder? 'Y'/'N'")
-  if result == 'Y' or result == 'y' :
-    flag = True
-    clear()
-  if result == 'N'or result == 'n':
-    flag = False
-print("Biding Details: ")
-
-amt =0
-for key in bid_details:
-  print("Name: ",key," ","Bid Amount:"," ",bid_details[key])
-  if amt < bid_details[key]:
-    amt = bid_details[key]
-    winner = key
-
-print(f"The winner is {winner} with {amt} as bid amount")
+  direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+  text = input("Type your message:\n").lower()
+  shift = int(input("Type the shift number:\n"))
+  
+  #if shift is a large no
+  shift = shift % 26
+  caesar(start_text=text, shift_amount=shift, cipher_direction=direction)
+  result = input("Do you want to continue? 'Y'/'N'")
+  if result == 'Y':
+    flag==1
+  if result == 'N':
+    flag==0
